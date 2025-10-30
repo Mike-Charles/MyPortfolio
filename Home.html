@@ -94,17 +94,39 @@
   <section id="contact">
     <div class="container">
       <h2>Contact Me</h2>
-      <form class="contact-form" action="Sendmail.php" method="POST">
+      <form class="contact-form" id="contact-form">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="title" placeholder="Subject" value="Portfolio Contact Message" required>
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
+
     </div>
   </section>
 
   <footer>
     <p>© 2025 Mike Mapanga. All Rights Reserved.</p>
   </footer>
+
+
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init("b4NPI7zaIHO0-gR_6"); // Replace with your EmailJS public key
+  })();
+
+  document.getElementById("contact-form").addEventListener("submit", function(event){
+    event.preventDefault();
+
+    emailjs.sendForm("service_qwgjiai", "template_rm1by8j", this)
+      .then(function(){
+        alert("✅ Message sent successfully to your Gmail!");
+      }, function(error){
+        alert("❌ Failed to send message: " + JSON.stringify(error));
+      });
+  });
+</script>
+
 </body>
 </html>
