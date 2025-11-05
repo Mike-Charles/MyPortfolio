@@ -1,18 +1,14 @@
-
-
-
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mike Mapanga | Portfolio</title>
-  <link rel="stylesheet" href="Style.css" />
-  
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   
+  <!-- HEADER -->
   <header>
     <div class="nav-container">
       <div class="logo">
@@ -23,6 +19,7 @@
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -31,66 +28,63 @@
     <div class="intro" id="home">
       <h1>Software Developer & UI/UX Designer</h1>
       <p>Building smart, beautiful, and user-centered digital solutions that make an impact.</p>
-      <a href="#projects" class="btn">View My Work</a>
+      <div class="buttons">
+        <a href="#projects" class="btn">View My Work</a>
+        <a href="Mike_Mapanga_CV.pdf" class="btn download" download>Download CV</a>
+      </div>
     </div>
   </header>
 
-  <section id="about">
-    <div class="container">
-      <h2>About Me</h2>
-      <p>
-        I’m Mike Mapanga, an Information Technology graduate passionate about crafting innovative software
-        and web solutions. With a strong foundation in programming, databases, and UI/UX design,
-        I focus on transforming ideas into impactful, user-friendly systems.
-      </p>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="container">
-      <h2>Technical Skills</h2>
-      <div class="skills">
-        <span class="skill">Web Development</span>
-        <span class="skill">Database Management</span>
-        <span class="skill">Server Administration</span>
-        <span class="skill">Networking</span>
-        <span class="skill">Artificial Intelligence</span>
-        <span class="skill">System Security</span>
-        <span class="skill">Java Programming</span>
-        <span class="skill">UI/UX Design</span>
-      </div>
-    </div>
-  </section>
-
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="container">
       <h2>Projects</h2>
-      <div class="projects">
-        <div class="project-card">
+
+      <!-- Project 1 -->
+      <div class="project-horizontal">
+        <img src="/images/court_cases.png" alt="Court Case Management">
+        <div class="project-details">
           <h3>Court Case Management Information System</h3>
-          <p>
-            A full-stack web system developed to improve case registration, tracking, and scheduling
-            for Malawi’s High Court Civil Division.
-          </p>
-        </div>
-
-        <div class="project-card">
-          <h3>Online Bus Booking System</h3>
-          <p>
-            Designed and developed a responsive system allowing passengers to reserve bus tickets online.
-          </p>
-        </div>
-
-        <div class="project-card">
-          <h3>AI Vacuum Cleaner Agent</h3>
-          <p>
-            Created an intelligent agent using the A* search algorithm to simulate smart, autonomous decision-making.
-          </p>
+          <p>A full-stack web system developed to improve case registration, tracking, and scheduling for Malawi’s High Court Civil Division.</p>
+          <div class="project-buttons">
+            <a href="#" class="btn small">Live Demo</a>
+            <a href="#" class="btn small outline">View Code</a>
+          </div>
         </div>
       </div>
+
+      <!-- Project 2 -->
+      <div class="project-horizontal">
+        <img src="/images/bus_booking.jpg" alt="Online Bus Booking">
+        <div class="project-details">
+          <h3>Online Bus Booking System</h3>
+          <p>Designed and developed a responsive system allowing passengers to reserve bus tickets online with real-time seat availability.</p>
+          <div class="project-buttons">
+            <a href="#" class="btn small">Live Demo</a>
+            <a href="#" class="btn small outline">View Code</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-horizontal">
+        <img src="/images/AI_Vacume.jpg" alt="AI Vacuum Cleaner">
+        <div class="project-details">
+          <h3>AI Vacuum Cleaner Agent</h3>
+          <p>Created an intelligent agent using the A* search algorithm to simulate smart, autonomous decision-making.</p>
+          <div class="project-buttons">
+            <a href="#" class="btn small">Live Demo</a>
+            <a href="#" class="btn small outline">View Code</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
+
+
+  <!-- CONTACT -->
   <section id="contact">
     <div class="container">
       <h2>Contact Me</h2>
@@ -101,32 +95,35 @@
         <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
-
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer>
+    <div class="socials">
+      <a href="mailto:mikecharlesmin@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email"></a>
+      <a href="https://linkedin.com/in/mikemapanga" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/145/145807.png" alt="LinkedIn"></a>
+      <a href="https://github.com/mikemapanga" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733553.png" alt="GitHub"></a>
+    </div>
     <p>© 2025 Mike Mapanga. All Rights Reserved.</p>
   </footer>
 
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("b4NPI7zaIHO0-gR_6"); // Replace with your EmailJS public key
+    })();
 
-<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init("b4NPI7zaIHO0-gR_6"); // Replace with your EmailJS public key
-  })();
+    document.getElementById("contact-form").addEventListener("submit", function(event){
+      event.preventDefault();
 
-  document.getElementById("contact-form").addEventListener("submit", function(event){
-    event.preventDefault();
-
-    emailjs.sendForm("service_qwgjiai", "template_rm1by8j", this)
-      .then(function(){
-        alert("✅ Message sent successfully to your Gmail!");
-      }, function(error){
-        alert("❌ Failed to send message: " + JSON.stringify(error));
-      });
-  });
-</script>
-
+      emailjs.sendForm("service_qwgjiai", "template_rm1by8j", this)
+        .then(function(){
+          alert("✅ Message sent successfully to your Gmail!");
+        }, function(error){
+          alert("❌ Failed to send message: " + JSON.stringify(error));
+        });
+    });
+  </script>
 </body>
 </html>
