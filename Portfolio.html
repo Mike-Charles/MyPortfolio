@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mike Mapanga | Projects</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --dark-bg: #1C1C1C;
+      --primary: #435146;
+      --secondary: #4A6958;
+      --darkest: #1B2922;
+      --text-light: #f0f0f0;
+      --text-gray: #ccc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* === Header === */
+    header {
+      background-color: rgba(28, 28, 28, 0.95);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      backdrop-filter: blur(10px);
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--secondary);
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+    }
+    .logo i {
+      margin-right: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav a {
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text-gray);
+    }
+    nav a:hover,
+    nav a.active {
+      color: var(--secondary);
+    }
+    .btn-contact {
+      padding: 0.7rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-contact:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 100%;
+      background: var(--text-light);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--darkest);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 1999;
+    }
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-menu ul {
+      list-style: none;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .mobile-menu li {
+      margin: 1.2rem 0;
+    }
+    .mobile-menu a {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+    .mobile-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: var(--text-gray);
+      cursor: pointer;
+    }
+
+    /* === Page Header === */
+    .page-header {
+      padding: 6rem 0 3rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(27, 41, 34, 0.9) 0%, rgba(67, 81, 70, 0.8) 100%);
+    }
+
+    /* Blobs */
+    .blob {
+      position: absolute;
+      background: var(--secondary);
+      border-radius: 50%;
+      filter: blur(12px);
+      z-index: 0;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .blob-1 { width: 200px; height: 150px; top: -50px; left: -80px; }
+    .blob-2 { width: 250px; height: 200px; bottom: -100px; right: -120px; }
+    .blob-3 { width: 120px; height: 100px; top: 30%; right: 5%; }
+    .blob-4 { width: 80px; height: 60px; bottom: 20%; left: 10%; }
+    .blob-5 { width: 150px; height: 120px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .blob-6 { width: 100px; height: 80px; top: 10%; right: 30%; }
+
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 2;
+    }
+    .page-subtitle {
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Filter Buttons */
+    .filter-buttons {
+      display: flex;
+      justify-content:flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0;
+      margin-bottom: 2rem;
+      z-index: 2;
+    }
+    .filter-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 30px;
+      font-weight: 500;
+      background: rgba(67, 81, 70, 0.2);
+      color: var(--text-light);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    /* === Project Grid Layout (Mimics Your Screenshot) === */
+
+    /* === Force Uniform Card Size & Image Coverage === */
+.project-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  background: rgba(27, 41, 34, 0.3);
+  /* 👇 Set fixed aspect ratio for all cards */
+  aspect-ratio: 0/0; /* You can change to 16/9, 1/1, etc. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover img {
+  transform: scale(1.05);
+}
+
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 0;
+    }
+
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+/* === Projects Section with Background Image === */
+#projects {
+  position: relative;
+  background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600') center/cover fixed no-repeat;
+  padding: 5em 0;
+  color: #fff;
+}
+
+#projects::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
+  z-index: 0;
+}
+
+#projects .container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+    /* Overlay on hover */
+    .project-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(27, 41, 34, 0.9), transparent);
+      padding: 1.2rem;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: center;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-overlay p {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin-bottom: 0.8rem;
+    }
+
+    .view-btn {
+      display: inline-block;
+      padding: 0.4rem 0.8rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .view-btn:hover {
+      background: var(--secondary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--darkest);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+    .socials {
+      margin: 1rem 0;
+    }
+    .socials a {
+      margin: 0 0.7rem;
+      color: var(--text-gray);
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+    .socials a:hover {
+      color: var(--secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .blob-1 { width: 140px; height: 105px; top: -35px; left: -55px; }
+      .blob-2 { width: 180px; height: 140px; bottom: -70px; right: -85px; }
+      .blob-3 { width: 90px; height: 75px; top: 25%; right: 3%; }
+      .blob-4 { width: 65px; height: 50px; bottom: 18%; left: 8%; }
+      .blob-5 { width: 110px; height: 90px; top: 45%; }
+      .blob-6 { width: 75px; height: 60px; top: 8%; right: 25%; }
+      .blob { filter: blur(10px); opacity: 0.35; }
+      .page-title { font-size: 2rem; }
+      .page-subtitle { font-size: 1rem; }
+      .projects-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul, .btn-contact { display: none; }
+      .filter-buttons { gap: 0.5rem; }
+      .filter-btn { padding: 0.5rem 1rem; font-size: 0.9rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .blob-1 { width: 90px; height: 70px; top: -20px; left: -30px; }
+      .blob-2 { width: 110px; height: 85px; bottom: -45px; right: -50px; }
+      .blob-3 { width: 55px; height: 45px; top: 20%; right: 1%; }
+      .blob-4 { width: 40px; height: 30px; bottom: 12%; left: 4%; }
+      .blob-5 { width: 70px; height: 55px; top: 40%; }
+      .blob-6 { width: 45px; height: 35px; top: 5%; right: 15%; }
+      .blob { filter: blur(8px); opacity: 0.3; }
+      .page-title { font-size: 1.8rem; }
+      .project-overlay h3 { font-size: 1rem; }
+      .project-overlay p { font-size: 0.85rem; }
+      .view-btn { font-size: 0.8rem; padding: 0.3rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><i class="fab fa-codepen"></i> Mike Mapanga</div>
+        <nav>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="#" class="active">Portfolio</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <a href="Contact.html" class="btn-contact">Contact</a>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-close" id="closeMenu">&times;</div>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Portfolio.html">Portfolio</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <a href="Contact.html" class="btn-contact" style="margin-top: 1rem;">Contact</a>
+  </div>
+
+  <section class="page-header">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-6"></div>
+    <h1 class="page-title">My Work And Projects</h1>
+    <p class="page-subtitle">A curated selection of my best work — from web apps to full-stack systems.</p>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="filter-buttons">
+        <button class="filter-btn active">All Projects</button>
+        <button class="filter-btn">Web Development</button>
+        <button class="filter-btn">Mobile Apps</button>
+        <button class="filter-btn">Design</button>
+      </div>
+
+      <!-- Project Grid -->
+      <!-- Project Grid -->
+      <div class="projects-grid">
+        <!-- Web Development Projects -->
+        <div class="project-card" data-category="web">
+          <img src="proPics/Advert3.jpeg" alt="Court Case Management System">
+          <div class="project-overlay">
+            <h3>Court Case Management</h3>
+            <p>Full-stack legal case tracker</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="web">
+          <img src="/proPics/Advert4.jpeg" alt="Bus Booking System">
+          <div class="project-overlay">
+            <h3>Bus Booking System</h3>
+            <p>Real-time seat reservation</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="web">
+          <img src="proPics/Advert5.jpeg" alt="Portfolio Website">
+          <div class="project-overlay">
+            <h3>Portfolio Website</h3>
+            <p>Responsive & animated design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <!-- Design Projects -->
+        <div class="project-card" data-category="design">
+          <img src="proPics/BarlozLoan.jpg" alt="Barloz Loan App UI">
+          <div class="project-overlay">
+            <h3>Barloz Loan UI</h3>
+            <p>Mobile app interface design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/Linwork3-Chikwagwani.png" alt="Linwork UI">
+          <div class="project-overlay">
+            <h3>Linwork UI</h3>
+            <p>Construction project dashboard</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="/proPics/DCproduction.jpg" alt="DC Production">
+          <div class="project-overlay">
+            <h3>DC Production</h3>
+            <p>Brand identity & poster design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/CakeBytes.jpg" alt="CakeBytes Branding">
+          <div class="project-overlay">
+            <h3>CakeBytes</h3>
+            <p>Bakery logo & menu design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/COSISS.jpg" alt="COSISS Logo">
+          <div class="project-overlay">
+            <h3>COSISS</h3>
+            <p>Student society branding</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/dentle.jpg" alt="Dentle Dental Clinic">
+          <div class="project-overlay">
+            <h3>Dentle Clinic</h3>
+            <p>Healthcare branding</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/birthday.jpg" alt="Birthday Poster">
+          <div class="project-overlay">
+            <h3>Birthday Event</h3>
+            <p>Social media poster design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design">
+          <img src="proPics/VibrantLadiesWithPastorTama.jpg" alt="Event Poster">
+          <div class="project-overlay">
+            <h3>Vibrant Ladies</h3>
+            <p>Church event poster</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="design" style= "background-color: #fff;">
+          <img src="proPics/LogoGRS.png" alt="GRS Logo">
+          <div class="project-overlay">
+            <h3>GRS Logo</h3>
+            <p>Business logo design</p>
+            <a href="#" class="view-btn">View Project →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>&copy; 2025 Mike Mapanga. All rights reserved.</p>
+      <p>Designed by Mike Mapanga</p>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove 'active' from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add 'active' to clicked button
+        button.classList.add('active');
+
+        const category = button.textContent.trim();
+        let filter;
+
+        // Map button text to category
+        if (category === 'All Projects') {
+          filter = 'all';
+        } else if (category === 'Web Development') {
+          filter = 'web';
+        } else if (category === 'Mobile Apps') {
+          filter = 'mobile';
+        } else if (category === 'Design') {
+          filter = 'design';
+        }
+
+        // Filter cards
+        projectCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>

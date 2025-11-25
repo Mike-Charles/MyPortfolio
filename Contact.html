@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mike Mapanga | Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --dark-bg: #1C1C1C;
+      --primary: #435146;
+      --secondary: #4A6958;
+      --darkest: #1B2922;
+      --text-light: #f0f0f0;
+      --text-gray: #ccc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* === Header === */
+    header {
+      background-color: rgba(28, 28, 28, 0.95);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+      backdrop-filter: blur(10px);
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--secondary);
+      letter-spacing: -1px;
+      display: flex;
+      align-items: center;
+    }
+    .logo i {
+      margin-right: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    nav a {
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text-gray);
+    }
+    nav a:hover,
+    nav a.active {
+      color: var(--secondary);
+    }
+    .btn-contact {
+      padding: 0.7rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+    .btn-contact:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      height: 3px;
+      width: 100%;
+      background: var(--text-light);
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: var(--darkest);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      z-index: 1999;
+    }
+    .mobile-menu.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-menu ul {
+      list-style: none;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .mobile-menu li {
+      margin: 1.2rem 0;
+    }
+    .mobile-menu a {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+    .mobile-close {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-size: 2rem;
+      color: var(--text-gray);
+      cursor: pointer;
+    }
+
+    /* === Page Header === */
+    .page-header {
+      padding: 4rem 0 2rem;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(27, 41, 34, 0.9) 0%, rgba(67, 81, 70, 0.8) 100%);
+    }
+
+    .blob {
+      position: absolute;
+      background: var(--secondary);
+      border-radius: 50%;
+      filter: blur(12px);
+      z-index: 0;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .blob-1 { width: 200px; height: 150px; top: -50px; left: -80px; }
+    .blob-2 { width: 250px; height: 200px; bottom: -100px; right: -120px; }
+    .blob-3 { width: 120px; height: 100px; top: 30%; right: 5%; }
+    .blob-4 { width: 80px; height: 60px; bottom: 20%; left: 10%; }
+    .blob-5 { width: 150px; height: 120px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    .blob-6 { width: 100px; height: 80px; top: 10%; right: 30%; }
+
+    .page-title {
+      text-align: center;
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 2;
+    }
+    .page-subtitle {
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Contact Content */
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      padding: 3rem 0;
+    }
+    .contact-info h3 {
+      font-size: 1.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .contact-method i {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-right: 1rem;
+      width: 24px;
+    }
+    .contact-method span,
+    .contact-method a {
+      color: var(--text-gray);
+      font-size: 1rem;
+    }
+    .contact-method a:hover {
+      color: var(--secondary);
+    }
+
+    /* === EmailJS Contact Form Styling === */
+.form-section {
+  position: relative;
+  z-index: 2;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--secondary);
+  background: rgba(74, 105, 88, 0.15);
+  box-shadow: 0 0 0 2px rgba(74, 105, 88, 0.3);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.btn-submit:hover {
+  background: var(--secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Placeholder styling */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-gray);
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .form-group input,
+  .form-group textarea {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.95rem;
+  }
+  .btn-submit {
+    padding: 0.8rem;
+    font-size: 1rem;
+  }
+}
+
+    /* Footer */
+    footer {
+      background: var(--darkest);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--text-gray);
+      font-size: 0.95rem;
+    }
+    .socials {
+      margin: 1rem 0;
+    }
+    .socials a {
+      margin: 0 0.7rem;
+      color: var(--text-gray);
+      font-size: 1.3rem;
+      transition: color 0.3s;
+    }
+    .socials a:hover {
+      color: var(--secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .blob-1 { width: 140px; height: 105px; top: -35px; left: -55px; }
+      .blob-2 { width: 180px; height: 140px; bottom: -70px; right: -85px; }
+      .blob-3 { width: 90px; height: 75px; top: 25%; right: 3%; }
+      .blob-4 { width: 65px; height: 50px; bottom: 18%; left: 8%; }
+      .blob-5 { width: 110px; height: 90px; top: 45%; }
+      .blob-6 { width: 75px; height: 60px; top: 8%; right: 25%; }
+      .blob { filter: blur(10px); opacity: 0.35; }
+      .page-title { font-size: 2rem; }
+      .contact-content { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      nav ul, .btn-contact { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .blob-1 { width: 90px; height: 70px; top: -20px; left: -30px; }
+      .blob-2 { width: 110px; height: 85px; bottom: -45px; right: -50px; }
+      .blob-3 { width: 55px; height: 45px; top: 20%; right: 1%; }
+      .blob-4 { width: 40px; height: 30px; bottom: 12%; left: 4%; }
+      .blob-5 { width: 70px; height: 55px; top: 40%; }
+      .blob-6 { width: 45px; height: 35px; top: 5%; right: 15%; }
+      .blob { filter: blur(8px); opacity: 0.3; }
+      .page-title { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo"><i class="fab fa-codepen"></i> Mike Mapanga</div>
+        <nav>
+          <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="Portfolio.html">Portfolio</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="#" class="active">Contact</a></li>
+          </ul>
+        </nav>
+        <a href="Contact.html" class="btn-contact">Contact</a>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-close" id="closeMenu">&times;</div>
+    <ul>
+      <li><a href="Home.html">Home</a></li>
+      <li><a href="Portfolio.html">Portfolio</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ul>
+    <a href="Contact.html" class="btn-contact" style="margin-top: 1rem;">Contact</a>
+  </div>
+
+  <section class="page-header">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+    <div class="blob blob-5"></div>
+    <div class="blob blob-6"></div>
+    <h1 class="page-title">Let’s Connect</h1>
+    <p class="page-subtitle">Have a project in mind? Just say hello — I’d love to hear from you.</p>
+  </section>
+
+  <div class="container">
+    <div class="contact-content">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <div class="contact-method">
+          <i class="fas fa-phone"></i>
+          <span>+265 997 17 73 53 | +265 885 87 97 22</span>
+        </div>
+        <div class="contact-method">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:mikecharlesmin@gmail.com">mikecharlesmin@gmail.com</a>
+        </div>
+        <div class="contact-method">
+          <i class="fab fa-whatsapp"></i>
+          <a href="https://wa.me/265997177353" target="_blank">Chat on WhatsApp</a>
+        </div>
+        <h3 style="margin-top: 2rem;">Follow Me</h3>
+        <div class="socials">
+          <a href="https://linkedin.com/in/mikemapanga" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/mikemapanga" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://facebook.com/mikemapanga" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+      </div>
+
+      <!-- ✅ REPLACED FORM SECTION BELOW ✅ -->
+      <div class="form-section">
+        <h3 style="color: white; margin-bottom: 1.5rem;">Send a Message</h3>
+        <form class="contact-form" id="contact-form">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" name="title" placeholder="Subject" value="Portfolio Contact Message" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="socials">
+        <a href="https://linkedin.com/in/mikemapanga" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/mikemapanga" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://facebook.com/mikemapanga" target="_blank"><i class="fab fa-facebook"></i></a>
+        <a href="https://wa.me/263771234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p>&copy; 2025 Mike Mapanga. All rights reserved.</p>
+      <p>Designed by Mike Mapanga</p>
+    </div>
+  </footer>
+
+  <!-- ✅ EmailJS Script ✅ -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("b4NPI7zaIHO0-gR_6"); // Your EmailJS Public Key
+    })();
+
+    document.getElementById("contact-form").addEventListener("submit", function(event){
+      event.preventDefault();
+
+      emailjs.sendForm("service_qwgjiai", "template_rm1by8j", this)
+        .then(function(){
+          alert("✅ Message sent successfully to your Gmail!");
+        }, function(error){
+          alert("❌ Failed to send message: " + JSON.stringify(error));
+        });
+    });
+  </script>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    document.querySelectorAll('.mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+  </script>
+</body>
+</html>
