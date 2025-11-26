@@ -232,6 +232,21 @@
       transform: translateY(-3px);
     }
 
+    .cv-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+.btn-cv.outline {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+.btn-cv.outline:hover {
+  background: var(--primary);
+  color: white;
+}
+
     .skills-section {
       margin-top: 2rem;
       margin-bottom: 4rem;
@@ -399,10 +414,12 @@
         
         
 
-        <a href="https://drive.google.com/uc?export=download&id=1-0PMEW18S29UWq7FKI3kTQ2nqSG92-Za" 
-        class="btn-cv" download>
-          Download CV
-        </a>
+        <div class="cv-actions">
+          <a href="https://drive.google.com/file/d/1Odt271U2ULpLTGyVjsr5OagNJVVzIdCq/view?usp=sharing" 
+            target="_blank" class="btn-cv">View CV</a>
+          <a href="https://drive.google.com/uc?export=download&id=1Odt271U2ULpLTGyVjsr5OagNJVVzIdCq" 
+            class="btn-cv outline" download>Download PDF</a>
+        </div>
       </div>
     </div>
 
